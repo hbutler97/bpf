@@ -1,5 +1,6 @@
 
 COMMONOBJS = bpf_load.o
+#bpf.o
 
 EXE= main
 TESTOBJS = $(EXE).o
@@ -23,6 +24,8 @@ LINUXINCLUDE =	-I$(linuxhdrs)/samples/bpf \
 
 BPFTOOLS = $(linuxhdrs)/samples/bpf
 BPFLOADER = $(BPFTOOLS)/bpf_load.c
+#BPFLIB = $(linuxhdrs)/tools/lib/bpf/bpf.c
+
 
 prefix ?= /usr/local
 
@@ -44,6 +47,9 @@ clean:
 
 bpf_load.o: $(BPFLOADER)
 	$(CC) $(DEBUG_FLAGS) -g -Wno-unused-variable -I../include $(LINUXINCLUDE) -c $(BPFLOADER) -o bpf_load.o $(CFLAGS)
+
+#bpf.o:
+#	$(CC) $(DEBUG_FLAGS) -g -Wno-unused-variable -I../include $(LINUXINCLUDE) -c $(BPFLIB) -o bpf.o $(CFLAGS)
 
 %.o: %.c
 	$(CC) $(DEBUG_FLAGS) -g -Wno-unused-variable -I../include $(LINUXINCLUDE) -c -o $@ $< $(CFLAGS)
